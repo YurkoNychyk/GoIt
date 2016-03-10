@@ -1,8 +1,8 @@
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by home on 07.03.2016.
  */
 public class MusicalInstrumentsShop {
-    Map<String, Float> priceList;
+    List<MusicalInstrument> instrumentsList;
 }
