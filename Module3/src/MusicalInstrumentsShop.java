@@ -1,5 +1,3 @@
-package com.goit.gojavaonline;
-
 import java.util.Map;
 
 /**
