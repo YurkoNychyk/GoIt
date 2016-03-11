@@ -1,6 +1,8 @@
 /**
  * Created by home on 11.03.2016.
  */
+//Клас відрізка. може конструюватися по двом точкам або по 4м координатам
+//має метод отримання довжини відрізка
 public class Line {
     private Point a = null;
     private Point b = null;
@@ -25,7 +27,7 @@ public class Line {
         b = new Point(x, y);
     }
 
-
+    //отрмання довжини відрізка
     public double getLength() {
         if (length <0 ) {
             length = Math.sqrt(Math.pow( (double)b.getX() - (double)a.getX(),2 ) +  Math.pow( (double)b.getY() - (double)a.getY(),2 ));

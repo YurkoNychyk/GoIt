@@ -1,6 +1,8 @@
 /**
  * Created by home on 11.03.2016.
  */
+
+//клас точки конструюється по двом координатам
 public class Point {
     private int x;
     private int y;
