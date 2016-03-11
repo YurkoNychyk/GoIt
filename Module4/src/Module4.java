@@ -6,8 +6,10 @@ import java.util.Scanner;
  */
 public class Module4 {
     public static void main(String[] args) {
+        double celT;
+        double farT;
 
-            switch (readInt("Виберіть фігуру, площу якої будем рахувати? (1: Коло, 2: Трикутник, 3: Прямокутник)",1)[0]) {
+            switch (readInt("Що будем рахувати? (1: Площу кола, 2: Площу трикутника, 3: Площу прямокутника, 4: Переводити С у F, 5: Переводити F у С)",1)[0]) {
 
                 case 1:
                     switch (readInt("Що ви знаєте про своє коло? 1: Радіус, 2: Координати центру і точки, що належить колу", 1)[0]) {
@@ -103,7 +105,16 @@ public class Module4 {
                         System.out.println("Такого прямокутника не існує!");
                         rectangle = null;
                     }
-                    
+                case 4:
+                    celT = readInt("Введіть значення температури в градусах цельсія", 1)[0];
+                    farT = TemperatureConvertor.convertToFarenheit(celT);
+                    System.out.println(celT + " градусів цельсія = " + farT+ "градусів фаренгейта" );
+                    break;
+                case 5:
+                    farT = readInt("Введіть значення температури в градусах фаренгейта", 1)[0];
+                    celT = TemperatureConvertor.convertToCelcius(farT);
+                    System.out.println(farT + " градусів фаренгейта = " + celT + "градусів цельсія" );
+                    break;
                     
             }
     }
