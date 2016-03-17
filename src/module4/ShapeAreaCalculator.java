@@ -6,7 +6,14 @@ package module4;
 //перегружений метод для розрахунку площі кола та багатокутника
 public class ShapeAreaCalculator {
     public static double calculateArea(Circle circle){
-        return Math.PI * Math.pow(circle.getRadius(), 2);
+        if (circle.getRadius() <= 0) {
+            System.out.println("Radius must be >0");
+            throw new IllegalStateException();
+        }
+        else    {
+            return Math.PI * Math.pow(circle.getRadius(), 2);
+        }
+
     }
     //проста перевірка чи ми маємо справу з трикутником чи з прямокутником
     public static double calculateArea(Polygon polygon){

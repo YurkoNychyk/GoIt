@@ -7,7 +7,7 @@ package module4;
 public class Line {
     private Point a = null;
     private Point b = null;
-    private double length = -1;
+    private Double length = null;
 
     public Line(Point a, Point b) {
         this.a = a;
@@ -30,11 +30,16 @@ public class Line {
 
     //отрмання довжини відрізка
     public double getLength() {
-        if (length <0 ) {
+        if (length == null) {
             length = Math.sqrt(Math.pow( (double)b.getX() - (double)a.getX(),2 ) +  Math.pow( (double)b.getY() - (double)a.getY(),2 ));
             return length;
         }
         else {
+            if (length <= 0 )
+            {
+                //System.out.println("Line length must be >0");
+                throw new IllegalStateException("Довжина має бути > 0!", null);
+            }
             return length;
         }
 
