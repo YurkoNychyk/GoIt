@@ -2,10 +2,21 @@ package module3;
 /**
  * Created by home on 06.03.2016.
  */
-public abstract class MusicalInstrument {
+public abstract class MusicalInstrument implements Cloneable{
+    private static long counter;
 
-    private String name;
+    final long id = counter++;
+
+    protected String type;
     private float price;
+
+    public MusicalInstrument(String type){
+        this.type = type;
+    }
+
+    public long getId() {
+        return id;
+    }
 
     public float getPrice() {
         return price;
@@ -15,12 +26,12 @@ public abstract class MusicalInstrument {
         this.price = price;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     abstract void playSound();

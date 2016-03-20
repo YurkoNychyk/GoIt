@@ -10,10 +10,10 @@ public class starter {
         double celT;
         double farT;
 
-            switch (readInt("Що будем рахувати? (1: Площу кола, 2: Площу трикутника, 3: Площу прямокутника, 4: Переводити С у F, 5: Переводити F у С)",1)[0]) {
+            switch (ConsoleReader.readInt("Що будем рахувати? (1: Площу кола, 2: Площу трикутника, 3: Площу прямокутника, 4: Переводити С у F, 5: Переводити F у С)",1)[0]) {
 
                 case 1:
-                    switch (readInt("Що ви знаєте про своє коло? 1: Радіус, 2: Координати центру і точки, що належить колу", 1)[0]) {
+                    switch (ConsoleReader.readInt("Що ви знаєте про своє коло? 1: Радіус, 2: Координати центру і точки, що належить колу", 1)[0]) {
                         case 1:
                             //тут в метод розрахунку площі передається результат роботи метода зчитування. в метод зчитування передається повідомлення, яке має відображатися перед вводом
                             //і кількість елементів масиву з введеними користувачем числами, який поверне метод.
@@ -22,7 +22,7 @@ public class starter {
                             while (true)    {
 
                                 try {
-                                    System.out.println("У кола з таким радіусом площа буде " + ShapeAreaCalculator.calculateArea(new Circle(readInt("Який у вашого кола радіус в міліметрах?", 1)[0])) + " квадратних міліметрів\n");
+                                    System.out.println("У кола з таким радіусом площа буде " + ShapeAreaCalculator.calculateArea(new Circle(ConsoleReader.readInt("Який у вашого кола радіус в міліметрах?", 1)[0])) + " квадратних міліметрів\n");
                                     break;
                                 }
                                 catch (IllegalStateException e) {
@@ -39,7 +39,7 @@ public class starter {
                             while (true)    {
                                 try {
                                     int[] circleCoordinates = new int[4];
-                                    circleCoordinates = readInt("Введіть координати центру A(x1,y1) та точки, що належить колу В(x2,y2) в такій послідовності через пробіл: x1 y1 x2 y2.", 4);
+                                    circleCoordinates = ConsoleReader.readInt("Введіть координати центру A(x1,y1) та точки, що належить колу В(x2,y2) в такій послідовності через пробіл: x1 y1 x2 y2.", 4);
                                     Line radius = new Line(circleCoordinates[0], circleCoordinates[1], circleCoordinates[2], circleCoordinates[3]);
                                     System.out.println(
                                             "У кола з центром в точці А(" + circleCoordinates[0] + "," + circleCoordinates[1] + ") та радіусом " + radius.getLength() + "(mm)"
@@ -63,14 +63,14 @@ public class starter {
                     //трикутник та прямокутник -- це об’єкти одного класу Polygon
                     //відрізняються значенням довжини останньої сторони. у трикутника довжина четвертої сторони = 0. а координати четвертої точки співпадають з координатами 3ї (реалізується в конструкторі)
                     Polygon triangle = null;
-                    switch (readInt("Виберіть спосіб задання трикутника. 1: Задати по точкам. 2: Задати по сторонам", 1)[0]) {
+                    switch (ConsoleReader.readInt("Виберіть спосіб задання трикутника. 1: Задати по точкам. 2: Задати по сторонам", 1)[0]) {
 
                         case 1:
                             while (true)    {
                                 try {
                                     int[] triangleCoordinates = new int[6];
                                     //метод зчитування повертає масив з 6 елементів -- координат точок трикутника
-                                    triangleCoordinates = readInt("Задайте координати точок в такій послідовності через пробіл x1 y1 x2 y2 x3 y3", 6);
+                                    triangleCoordinates = ConsoleReader.readInt("Задайте координати точок в такій послідовності через пробіл x1 y1 x2 y2 x3 y3", 6);
                                     //з них формуються три відрізки
                                     Line side1 = new Line(new Point(triangleCoordinates[0], triangleCoordinates[1]), new Point(triangleCoordinates[2], triangleCoordinates[3]));
                                     Line side2 = new Line(new Point(triangleCoordinates[2], triangleCoordinates[3]), new Point(triangleCoordinates[4], triangleCoordinates[5]));
@@ -90,7 +90,7 @@ public class starter {
 
                                 try {
                                     int[] triangleSides = new int[3];
-                                    triangleSides = readInt("Задайте довжини сторін через пробіл", 3);
+                                    triangleSides = ConsoleReader.readInt("Задайте довжини сторін через пробіл", 3);
                                     Line side1 = new Line(triangleSides[0]);
                                     Line side2 = new Line(triangleSides[1]);
                                     Line side3 = new Line(triangleSides[2]);
@@ -117,13 +117,13 @@ public class starter {
 
                 case 3:
                     Polygon rectangle = null;
-                    switch (readInt("Виберіть спосіб задання трикутника. 1: Задати по точкам. 2: Задати по сторонам", 1)[0]) {
+                    switch (ConsoleReader.readInt("Виберіть спосіб задання трикутника. 1: Задати по точкам. 2: Задати по сторонам", 1)[0]) {
 
                         case 1:
                             while (true)    {
                                 try {
                                     int[] rectangleCoordinates = new int[8];
-                                    rectangleCoordinates = readInt("Задайте координати точок в такій послідовності через пробіл x1 y1 x2 y2 x3 y3", 8);
+                                    rectangleCoordinates = ConsoleReader.readInt("Задайте координати точок в такій послідовності через пробіл x1 y1 x2 y2 x3 y3", 8);
 
                                     Line side1 = new Line(new Point(rectangleCoordinates[0], rectangleCoordinates[1]), new Point(rectangleCoordinates[2], rectangleCoordinates[3]));
                                     Line side2 = new Line(new Point(rectangleCoordinates[2], rectangleCoordinates[3]), new Point(rectangleCoordinates[4], rectangleCoordinates[5]));
@@ -142,7 +142,7 @@ public class starter {
                             while (true)    {
                                 try {
                                     int[] triangleSides = new int[4];
-                                    triangleSides = readInt("Задайте довжини сторін через пробіл", 4);
+                                    triangleSides = ConsoleReader.readInt("Задайте довжини сторін через пробіл", 4);
                                     Line side1 = new Line(triangleSides[0]);
                                     Line side2 = new Line(triangleSides[1]);
                                     Line side3 = new Line(triangleSides[2]);
@@ -169,12 +169,12 @@ public class starter {
 
                     break;
                 case 4:
-                    celT = readInt("Введіть значення температури в градусах цельсія", 1)[0];
+                    celT = ConsoleReader.readInt("Введіть значення температури в градусах цельсія", 1)[0];
                     farT = TemperatureConvertor.convertToFarenheit(celT);
                     System.out.println(celT + " градусів цельсія = " + farT+ "градусів фаренгейта" );
                     break;
                 case 5:
-                    farT = readInt("Введіть значення температури в градусах фаренгейта", 1)[0];
+                    farT = ConsoleReader.readInt("Введіть значення температури в градусах фаренгейта", 1)[0];
                     celT = TemperatureConvertor.convertToCelcius(farT);
                     System.out.println(farT + " градусів фаренгейта = " + celT + "градусів цельсія" );
                     break;
@@ -182,24 +182,7 @@ public class starter {
             }
     }
 
-    public static int[] readInt(String welcomeString, int argsNumber) {
-        //Метод для зчитування чисел з консолі. не відстане доки користувач не введе числа
-        while (true) {
-            try {
-                int[] args = new int[argsNumber];
-                System.out.println(welcomeString);
-                //BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
-                //return Integer.parseInt(consoleReader.readLine());
-                Scanner consoleReader = new Scanner(System.in);
-                for (int i = 0; i < argsNumber; i++) {
-                    args[i] = consoleReader.nextInt();
-                }
-                return args;
-            } catch (Exception E) {
-                System.out.println("Помилка вводу!");
-            }
-        }
-    }
+
 
     public static boolean polygonExist(Polygon polygon) {
         //Метод для перевірки можливості замкнути периметр. Для цього треба щоб довжина будь-якої сторони була менша за суму довжин інших сторін

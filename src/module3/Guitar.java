@@ -6,4 +6,8 @@ public class Guitar extends MusicalInstrument{
     public void playSound() {
         System.out.println("Guitar sound");
     }
+
+    public Guitar(String type) {
+        super(type);
+    }
 }

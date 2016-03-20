@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by home on 17.03.2016.
  */
-public class starter {
+public class Starter {
     public static void main(String[] args) {
         int[] array1 = new int[10];
         for (int i=0; i<array1.length; i++) {
