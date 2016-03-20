@@ -23,21 +23,43 @@ public class starter {
             instrumentSupplyList.add(new Guitar("guitar"));
         }
 
-        for (int i=0; i<1; i++)  {
+        for (int i=0; i<2; i++)  {
             instrumentSupplyList.add(new Tube("tube"));
         }
 
         //making instruments supply to shop
         muztorg.makeInstrumentsSupply(instrumentSupplyList);
 
-        order = muztorg.makeOrder();
-       /* for (MusicalInstrument instruments: muztorg.getAvaibleInstruments()
+        for (MusicalInstrument instrument:muztorg.getAvaibleInstruments()
              ) {
-            System.out.println(instruments.getType() +":"+ instruments.getId());
-        }*/
+            System.out.println(instrument.getType() + " id: " + instrument.getId());
+        }
 
-        muztorg.prepareInstruments(order);
+        order = muztorg.makeOrder();
 
+        try{
+            List<MusicalInstrument> suppliedInstruments = muztorg.prepareInstruments(order);
+            muztorg.removeInstrument(suppliedInstruments);
+        }
+
+        catch (InvalidInstrumentName e){
+            System.err.println(e.getMessage());
+        }
+        catch (IllegalArgumentException e){
+            System.err.println(e.getMessage());
+        }
+
+        /*System.out.println("List of instruments to be removed: ");
+        for (MusicalInstrument instrument:suppliedInstruments
+             ) {
+            System.out.println(instrument.getType() + ":" + instrument.getId());
+        }
+        System.out.println();*/
+
+        for (MusicalInstrument instrument:muztorg.getAvaibleInstruments()
+                ) {
+            System.out.println(instrument.getType() + " id: " + instrument.getId());
+        }
 
     }
 

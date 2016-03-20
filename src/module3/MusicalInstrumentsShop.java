@@ -27,47 +27,6 @@ public class MusicalInstrumentsShop {
         this.avaibleInstruments.addAll(supplyList);
     }
 
-    public List<MusicalInstrument> prepareInstruments(Map<String,Integer> order) {
-        List<MusicalInstrument> orderedInstruments = new ArrayList<MusicalInstrument>();
-
-
-        try {
-            for (Map.Entry<String, Integer> orderEntry : order.entrySet()
-                 ) {
-                String type = orderEntry.getKey();
-                int quantityNeeded = orderEntry.getValue();
-                int numberOfInstrumentsAvaible = 0;
-
-                for (MusicalInstrument avaibleInstrument :avaibleInstruments
-                     ) {
-                    System.out.println("\"" + avaibleInstrument.getType()+ "\" ! " + type + ". Needed: "+ quantityNeeded + ", Found: " + numberOfInstrumentsAvaible);
-                    if (avaibleInstrument.getType().equals(type) && quantityNeeded < numberOfInstrumentsAvaible) {
-                        numberOfInstrumentsAvaible++;
-                    }
-                }
-                if (numberOfInstrumentsAvaible == 0) {
-                    //throw new InvalidInstrumentName("No such instrument!");
-                    System.err.println("nosuchinstrument");
-                    break;
-                }
-                else   if (numberOfInstrumentsAvaible < quantityNeeded) {
-                    //throw new IllegalArgumentException("Not enough " + type + "s in this shop.");
-                    System.err.println("notenoughinstruments");
-                    break;
-                }
-            }
-
-        }
-
-        catch (InvalidInstrumentName e){
-            System.err.println(e.getMessage());
-        }
-        catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
-        return orderedInstruments;
-    }
-
     public Map<String,Integer> makeOrder() {
         Map<String, Integer> order = new HashMap<String, Integer>();
         boolean exit = false;
@@ -111,6 +70,63 @@ public class MusicalInstrumentsShop {
         }
         return order;
     }
+
+
+    public List<MusicalInstrument> prepareInstruments(Map<String,Integer> order) throws IllegalArgumentException, InvalidInstrumentName {
+        List<MusicalInstrument> orderedInstruments = new ArrayList<>();
+
+            for (Map.Entry<String, Integer> orderEntry : order.entrySet()
+                    ) {
+                String type = orderEntry.getKey();
+                int quantityNeeded = orderEntry.getValue();
+                int numberOfInstrumentsAvaible = 0;
+
+                for (MusicalInstrument avaibleInstrument : avaibleInstruments
+                        ) {
+                    if (avaibleInstrument.getType().equals(type) && quantityNeeded > numberOfInstrumentsAvaible) {
+                        numberOfInstrumentsAvaible++;
+                        orderedInstruments.add(avaibleInstrument);
+                    }
+                }
+                /*for (MusicalInstrument instrument:orderedInstruments
+                     ) {
+                    System.out.println(instrument.getType() + ":" + instrument.getId());
+
+                }*/
+
+
+                if (numberOfInstrumentsAvaible == 0) {
+                    throw new InvalidInstrumentName("No such instrument!");
+
+                } else if (numberOfInstrumentsAvaible < quantityNeeded) {
+                    throw new IllegalArgumentException("Not enough " + type + "s in this shop. You want " + quantityNeeded + " There is " + numberOfInstrumentsAvaible);
+
+                }
+            }
+
+        return orderedInstruments;
+
+    }
+
+    public void removeInstrument(List<MusicalInstrument> orderedInstruments){
+
+        for (MusicalInstrument orderEntry:orderedInstruments
+             ) {
+            Iterator<MusicalInstrument> avaibleInstrumentsIterator = this.avaibleInstruments.iterator();
+
+            while (avaibleInstrumentsIterator.hasNext()){
+                MusicalInstrument instrumentToRemove = avaibleInstrumentsIterator.next();
+                System.out.println(instrumentToRemove.getId());
+                if (instrumentToRemove.getType().equals(orderEntry.getType())){
+                    System.out.println( instrumentToRemove.getType()+ ", id:" + instrumentToRemove.getId() +  ": removed");
+                    avaibleInstrumentsIterator.remove();
+                    break;
+                }
+            }
+        }
+
+    }
+
 
 
 }
