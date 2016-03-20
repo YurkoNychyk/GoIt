@@ -23,7 +23,7 @@ public class starter {
             instrumentSupplyList.add(new Guitar("guitar"));
         }
 
-        for (int i=0; i<2; i++)  {
+        for (int i=0; i<1; i++)  {
             instrumentSupplyList.add(new Tube("tube"));
         }
 
