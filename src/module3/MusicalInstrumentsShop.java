@@ -113,7 +113,7 @@ public class MusicalInstrumentsShop {
                 if (instrumentToRemove.getType().equals(orderEntry.getType())){
                     System.out.println( instrumentToRemove.getType()+ ", id:" + instrumentToRemove.getId() +  ": removed");
                     avaibleInstrumentsIterator.remove();
-                    break;//breake iteration after each match to prevent next elements with the same key being deleted
+                    break;//break iteration after each match to prevent next elements with the same key being deleted
                 }
             }
         }
