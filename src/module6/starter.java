@@ -12,7 +12,8 @@ public class starter {
     public static void main(String[] args) {
         MusicalInstrumentsShop muztorg = new MusicalInstrumentsShop();
         Map <String,Integer> order = new HashMap<String, Integer>();
-        //making list of supplied to shop instruments
+
+        //making list of instruments which will be added to shop
         ArrayList<MusicalInstrument> instrumentSupplyList = new ArrayList<>();
 
         for (int i=0; i<5; i++)  {
@@ -27,14 +28,15 @@ public class starter {
             instrumentSupplyList.add(new Tube("tube"));
         }
 
-        //making instruments supply to shop
+        //adding instruments to our shops list
         muztorg.makeInstrumentsSupply(instrumentSupplyList);
 
+        //printing shop contense
         for (MusicalInstrument instrument:muztorg.getAvaibleInstruments()
              ) {
             System.out.println(instrument.getType() + " id: " + instrument.getId());
         }
-
+        //adding instruments to order user input
         order = muztorg.makeOrder();
 
         try{
@@ -48,14 +50,7 @@ public class starter {
         catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
         }
-
-        /*System.out.println("List of instruments to be removed: ");
-        for (MusicalInstrument instrument:suppliedInstruments
-             ) {
-            System.out.println(instrument.getType() + ":" + instrument.getId());
-        }
-        System.out.println();*/
-
+        //printing remaining instruments
         for (MusicalInstrument instrument:muztorg.getAvaibleInstruments()
                 ) {
             System.out.println(instrument.getType() + " id: " + instrument.getId());
