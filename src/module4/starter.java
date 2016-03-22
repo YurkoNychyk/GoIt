@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Created by home on 10.03.2016.
  */
-public class starter {
+public class Starter {
     public static void main(String[] args) {
         double celT;
         double farT;

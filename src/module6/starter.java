@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by home on 17.03.2016.
  */
-public class starter {
+public class Starter {
     public static void main(String[] args) {
         MusicalInstrumentsShop muztorg = new MusicalInstrumentsShop();
         Map <String,Integer> order = new HashMap<String, Integer>();
