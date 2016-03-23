@@ -15,7 +15,15 @@ public class ShapeAreaCalculator {
         }
 
     }
+
+
+
     //проста перевірка чи ми маємо справу з трикутником чи з прямокутником
+
+    /*
+    Ось тут у мене типовий Golden Hammer. Варто було б написати окремі методи для фігур, площа яких рахується по різними формулам
+    */
+
     public static double calculateArea(Polygon polygon){
         if (polygon.side4.getLength() == 0) {
             //розрахунок половини периметру трикутника
