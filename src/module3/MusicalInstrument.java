@@ -2,13 +2,18 @@ package module3;
 /**
  * Created by home on 06.03.2016.
  */
-public abstract class MusicalInstrument implements Cloneable{
+public abstract class MusicalInstrument implements Comparable{
     private static long counter;
 
     final long id = counter++;
 
     protected String type;
-    private float price;
+    private int price;
+
+    public MusicalInstrument(String type, int price) {
+        this.type = type;
+        this.price = price;
+    }
 
     public MusicalInstrument(String type){
         this.type = type;
@@ -18,11 +23,11 @@ public abstract class MusicalInstrument implements Cloneable{
         return id;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -35,4 +40,33 @@ public abstract class MusicalInstrument implements Cloneable{
     }
 
     abstract void playSound();
+
+    @Override
+    public String toString() {
+        return "|| MusicalInstrument" +
+                "\t|| id=" + id +
+                "\t\t|| type='" + type + '\'' +
+                "\t\t\t|| price=" + price +
+                "\t||";
+    }
+    @Override
+    public int compareTo(Object o) {
+        final int BEFORE = -1;
+        final int EQUAL = 0;
+        final int AFTER = 1;
+
+        MusicalInstrument instrument = (MusicalInstrument)o;
+
+        if (this.getPrice() <= instrument.getPrice()){
+            return AFTER;
+        }
+//        if (this.getPrice() == instrument.getPrice()){
+//            return EQUAL;
+//        }
+        if (this.getPrice() > instrument.getPrice()){
+            return BEFORE;
+        }
+
+        return 0;
+    }
 }
