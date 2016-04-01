@@ -9,12 +9,15 @@ import java.util.Iterator;
  * Created by home on 23.03.2016.
  */
 public class CollectionPrint  {
-    public static void printOutMusicalInstrument(Collection<MusicalInstrument> collection) {
-        Iterator iter = collection.iterator();
 
+    public static String printOutMusicalInstrument(Collection<MusicalInstrument> collection) {
+        Iterator iter = collection.iterator();
+        StringBuffer outputStringBuffer = new StringBuffer();
         while (iter.hasNext()){
-            System.out.println(iter.next().toString());
+            outputStringBuffer.append(iter.next().toString());
+            outputStringBuffer.append("\n");
         }
+        return outputStringBuffer.toString();
     }
 
 }

@@ -43,10 +43,10 @@ public abstract class MusicalInstrument implements Comparable{
 
     @Override
     public String toString() {
-        return "|| MusicalInstrument" +
+        return  "|| MusicalInstrument" +
                 "\t|| id=" + id +
-                "\t\t|| type='" + type + '\'' +
-                "\t\t\t|| price=" + price +
+                "\t|| type='" + type + '\'' +
+                "\t|| price=" + price +
                 "\t||";
     }
     @Override

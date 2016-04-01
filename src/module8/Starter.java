@@ -1,5 +1,6 @@
 package module8;
 import module3.*;
+import module9.*;
 
 import java.util.*;
 
@@ -11,18 +12,34 @@ public class Starter {
     public static void main(String[] args) {
 
         List<MusicalInstrument> listOfInstruments = new LinkedList<>();
+        String encodedCollectionText;
+        String decodedCollectionText;
+
         //Filling up collections with random objects
         generateCollection(listOfInstruments);
-
         HashSet<MusicalInstrument> setOfInstruments = new HashSet(listOfInstruments);
         TreeSet<MusicalInstrument> treeSetMusicalInstruments = new TreeSet(listOfInstruments);
 
+
+/*
         System.out.println("LinkedList");
-        CollectionPrint.printOutMusicalInstrument(listOfInstruments);
+        System.out.println(CollectionPrint.printOutMusicalInstrument(listOfInstruments));
         System.out.println("Set");
-        CollectionPrint.printOutMusicalInstrument(setOfInstruments);
+        System.out.println(CollectionPrint.printOutMusicalInstrument(setOfInstruments));
         System.out.println("Treeset");
-        CollectionPrint.printOutMusicalInstrument(treeSetMusicalInstruments);
+        System.out.println(CollectionPrint.printOutMusicalInstrument(treeSetMusicalInstruments));
+*/
+
+        System.out.println("Normal collection:");
+        System.out.println(CollectionPrint.printOutMusicalInstrument(treeSetMusicalInstruments));
+
+        encodedCollectionText = Coder.encodeString(CollectionPrint.printOutMusicalInstrument(treeSetMusicalInstruments),5);
+        System.out.println("Encoded collection: \n" + encodedCollectionText);
+
+        decodedCollectionText = Coder.decodeString(encodedCollectionText,5);
+        System.out.println("\nDecoded collection: \n" + decodedCollectionText);
+
+        
 
     }
     //Fill up collection with an object of a random type
