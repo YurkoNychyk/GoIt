@@ -52,13 +52,25 @@ public class Starter {
                         fileName = ConsoleReader.readString("Введіть ім’я файлу");
                         encodedFile = new File(fileName);
                         StringBuffer fileInput = new StringBuffer();
+                        String substring;
                         try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
-
-
-                                fileInput.append(in.readLine());
+                            int i=0;
+                            while (true) {
+                                i++;
+                                System.out.println("reading line" + i);
+                                substring = in.readLine();
+                                System.out.println(substring);
+                                if (substring!=null){
+                                    fileInput.append(substring+"\n");
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
 
                             encodedMessage = fileInput.toString();
-                            System.out.println("Повідомленя прочитане: " + encodedMessage);
+                            System.out.println("Повідомленя прочитане:\n" + encodedMessage);
                             break;
                         }
                         catch (EOFException e){
