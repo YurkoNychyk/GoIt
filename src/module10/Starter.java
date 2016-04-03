@@ -3,6 +3,9 @@ import module4.ConsoleReader;
 import module9.Coder;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 /**
  * Created by home on 02.04.2016.
@@ -22,7 +25,6 @@ public class Starter {
             switch (ConsoleReader.readInt("\n1 - Зашифрувати повідомлення та записати його у файл. \n2 - Розшифрувати повідомлення з файлу",1)[0]){
                 case 1:
 
-
                     message = ConsoleReader.readString("Введіть своє повідомлення та натисніть 'Enter'");
                     encodeKey = ConsoleReader.readInt("Введіть ключ шифрування.",1)[0];
                     System.out.println("Повідомлення шифрується з ключем \"" + encodeKey +  "\"");
@@ -32,8 +34,9 @@ public class Starter {
                     while (true) {
                         fileName = ConsoleReader.readString("Введіть ім’я файлу");
                         encodedFile = new File(fileName);
-                        try (DataOutputStream outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(encodedFile)))) {
-                            outputStream.write(encodedMessage.getBytes());
+                        try (BufferedWriter out = new BufferedWriter( new FileWriter(fileName)){
+                        }){
+                            out.write(encodedMessage);
                             System.out.println("Повідомлення зашифровано та збережено в файлі: "+ encodedFile.getAbsolutePath());
                             break;
                         }
@@ -48,26 +51,35 @@ public class Starter {
                     while (true) {
                         fileName = ConsoleReader.readString("Введіть ім’я файлу");
                         encodedFile = new File(fileName);
-                        try (DataInputStream inputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(encodedFile)))) {
-                            encodedMessage = inputStream.readUTF();
-                            System.out.println("Encoded message: " + encodedMessage);
-                            decodeKey = ConsoleReader.readInt("Введіть ключ шифрування.",1)[0];
-                            System.out.println("Розшифроване повідомлення:\n"+ Coder.decodeString(encodedMessage,decodeKey));
+                        StringBuffer fileInput = new StringBuffer();
+                        try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
+
+
+                                fileInput.append(in.readLine());
+
+                            encodedMessage = fileInput.toString();
+                            System.out.println("Повідомленя прочитане: " + encodedMessage);
                             break;
                         }
                         catch (EOFException e){
-                            System.err.println("Повідомленя прочитане: " + e.getMessage());
-                            System.out.println("Encoded message: " + encodedMessage);
+                            System.out.println("eof");
+
+                        }
+                        catch (FileNotFoundException e){
+                            System.out.println("Немає такого файлу!");
                         }
                         catch (IOException e){
                             e.printStackTrace();
                         }
-                        break;
+
                     }
+
+                    decodeKey = ConsoleReader.readInt("Введіть ключ шифрування.",1)[0];
+                    System.out.println("Розшифроване повідомлення:\n"+ Coder.decodeString(encodedMessage,decodeKey));
                     break;
 
                 default:
-                    System.out.println(encodedMessage);
+
                     break;
             }
 
