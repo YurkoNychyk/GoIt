@@ -35,7 +35,7 @@ public class Line {
             return length;
         }
         else {
-            if (length <= 0 )
+            if (length < 0 )
             {
                 //System.out.println("Line length must be >0");
                 throw new IllegalStateException("Довжина має бути > 0!", null);

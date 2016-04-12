@@ -18,4 +18,16 @@ public class Circle {
         return radius.getLength();
     }
 
+
+    public double calculateArea(){
+        if (this.getRadius() <= 0) {
+            System.out.println("Radius must be >0");
+            throw new IllegalStateException();
+        }
+        else    {
+            return Math.PI * Math.pow(this.getRadius(), 2);
+        }
+
+    }
+
 }

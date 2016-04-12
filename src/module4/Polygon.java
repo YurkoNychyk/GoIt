@@ -59,5 +59,45 @@ public class Polygon {
         sideNumber = 4;
     }
 
+    public double calculateArea(){
+        if (polygonExist()) {
+            if (this.side4.getLength() == 0) {
+                //розрахунок половини периметру трикутника
+                double p = (this.side1.getLength() + this.side2.getLength() + this.side3.getLength()) / 2;
+                // sqrt(p* (p-side1)*(p-side2)*(p-side3))
+                return Math.sqrt(p * (p - this.side1.getLength()) * (p - this.side2.getLength()) * (p - this.side3.getLength()));
+            }
+            else {
+                //розрахунок площі прямокутника
+                return this.side1.getLength()*this.side2.getLength();
+            }
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+    }
+    public boolean polygonExist() {
+        //Метод для перевірки можливості замкнути периметр. Для цього треба щоб довжина будь-якої сторони була менша за суму довжин інших сторін
+        double maxSide = Math.max(Math.max(this.side1.getLength(),this.side2.getLength()), Math.max(this.side3.getLength(),this.side4.getLength() ));
+        double perimeter = this.side1.getLength() + this.side2.getLength() +  this.side3.getLength() + this.side4.getLength();
+
+        //щоб не перевіряти всі достатньо перевірити чи менша довжина найдовшої сторони за суму довжин інших сторін (сума інших сторін розраховується як різниця периметру і найдовшої сторони)
+         if (maxSide < (perimeter - maxSide)){
+
+            if (this.getSideNumber() == 3) {
+                return true;
+            }
+            else
+            if ( (this.side1.getLength() == this.side3.getLength() ) && ( this.side4.getLength() == this.side2.getLength() ) ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else
+            return false;
+    }
+
 
 }

@@ -22,7 +22,8 @@ public class Starter {
                             while (true)    {
 
                                 try {
-                                    System.out.println("У кола з таким радіусом площа буде " + ShapeAreaCalculator.calculateArea(new Circle(ConsoleReader.readInt("Який у вашого кола радіус в міліметрах?", 1)[0])) + " квадратних міліметрів\n");
+                                    Circle circle =  new Circle(ConsoleReader.readInt("Який у вашого кола радіус в міліметрах?", 1)[0]);
+                                    System.out.println("У кола з таким радіусом площа буде " + circle.calculateArea() + " квадратних міліметрів\n");
                                     break;
                                 }
                                 catch (IllegalStateException e) {
@@ -41,10 +42,11 @@ public class Starter {
                                     int[] circleCoordinates = new int[4];
                                     circleCoordinates = ConsoleReader.readInt("Введіть координати центру A(x1,y1) та точки, що належить колу В(x2,y2) в такій послідовності через пробіл: x1 y1 x2 y2.", 4);
                                     Line radius = new Line(circleCoordinates[0], circleCoordinates[1], circleCoordinates[2], circleCoordinates[3]);
+                                    Circle circle = new Circle(radius);
                                     System.out.println(
                                             "У кола з центром в точці А(" + circleCoordinates[0] + "," + circleCoordinates[1] + ") та радіусом " + radius.getLength() + "(mm)"
                                                     + " площа рівна "
-                                                    + ShapeAreaCalculator.calculateArea(new Circle(radius))
+                                                    + circle.calculateArea()
                                                     + " квадратних міліметрів");
                                     break;
                                 }
@@ -106,10 +108,13 @@ public class Starter {
                             System.out.println("Невірний вибір!");
                     }
                     //перевірка замкнутості периметру трикутника
-                    if (polygonExist(triangle)) {
-                        System.out.println("Площа трикутника рівна " + ShapeAreaCalculator.calculateArea(triangle) + " квадратних міліметрів");
-                    } else {
+                    try {
+                        System.out.println("Площа трикутника рівна " + triangle.calculateArea() + " квадратних міліметрів");
+                    }
+
+                    catch (IllegalStateException e){
                         System.out.println("Такого трикутника не існує!");
+                        System.err.println(e.getMessage());
                         triangle = null; //заклинання для виклику прибиральника :)
                     }
 
@@ -117,7 +122,7 @@ public class Starter {
 
                 case 3:
                     Polygon rectangle = null;
-                    switch (ConsoleReader.readInt("Виберіть спосіб задання трикутника. 1: Задати по точкам. 2: Задати по сторонам", 1)[0]) {
+                    switch (ConsoleReader.readInt("Виберіть спосіб задання прямокутника. 1: Задати по точкам. 2: Задати по сторонам", 1)[0]) {
 
                         case 1:
                             while (true)    {
@@ -149,9 +154,10 @@ public class Starter {
                                     Line side4 = new Line(triangleSides[3]);
                                     rectangle = new Polygon(side1, side2, side3, side4);
 
-                                    if (polygonExist(rectangle)) {
-                                        System.out.println("Площа прямокутника рівна " + ShapeAreaCalculator.calculateArea(rectangle) + " квадратних міліметрів");
-                                    } else {
+                                    try {
+                                        System.out.println("Площа прямокутника рівна " + rectangle.calculateArea() + " квадратних міліметрів");
+                                    }
+                                    catch (IllegalStateException e){
                                         System.out.println("Такого прямокутника не існує!");
                                         rectangle = null;
                                     }
@@ -181,34 +187,5 @@ public class Starter {
                     
             }
     }
-
-
-
-    public static boolean polygonExist(Polygon polygon) {
-        //Метод для перевірки можливості замкнути периметр. Для цього треба щоб довжина будь-якої сторони була менша за суму довжин інших сторін
-        double maxSide = Math.max(Math.max(polygon.side1.getLength(),polygon.side2.getLength()), Math.max(polygon.side3.getLength(),polygon.side4.getLength() ));
-        double perimeter = polygon.side1.getLength() + polygon.side2.getLength() +  polygon.side3.getLength() + polygon.side4.getLength();
-        //також перевіряється чи існує взагалі об’єкт
-        if (polygon == null ) {
-            return false;
-        }
-        //щоб не перевіряти всі достатньо перевірити чи менша довжина найдовшої сторони за суму довжин інших сторін (сума інших сторін розраховується як різниця периметру і найдовшої сторони)
-        else if (maxSide < (perimeter - maxSide)){
-
-            if (polygon.getSideNumber() == 3) {
-                return true;
-            }
-            else
-                if ( (polygon.side1.getLength() == polygon.side3.getLength() ) && ( polygon.side4.getLength() == polygon.side2.getLength() ) ) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-        }
-        else
-            return false;
-    }
-
 }
 
