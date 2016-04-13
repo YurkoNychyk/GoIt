@@ -15,7 +15,8 @@ public class Starter {
         System.out.println();
         System.out.println("Min element is " + FindMinMax.getMin(array1));
         System.out.println("Max element is " + FindMinMax.getMax(array1));
-
+        System.out.println("Sorted array:");
+        ArraySorting.printArray(ArraySorting.sortArray(array1));
     }
 
 }
