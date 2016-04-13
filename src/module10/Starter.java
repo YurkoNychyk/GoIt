@@ -7,6 +7,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+import static module10.FileOps.readMessageFromFile;
+import static module10.FileOps.writeMessageToFile;
+
 /**
  * Created by home on 02.04.2016.
  */
@@ -34,15 +37,7 @@ public class Starter {
                     while (true) {
                         fileName = ConsoleReader.readString("Введіть ім’я файлу");
                         encodedFile = new File(fileName);
-                        try (BufferedWriter out = new BufferedWriter( new FileWriter(fileName)){
-                        }){
-                            out.write(encodedMessage);
-                            System.out.println("Повідомлення зашифровано та збережено в файлі: "+ encodedFile.getAbsolutePath());
-                            break;
-                        }
-                        catch (Exception e){
-                            System.err.println("Некоректне ім’я файлу: " + e.getMessage());
-                        }
+                        writeMessageToFile(encodedMessage, fileName);
                         break;
                     }
                     break;
@@ -51,39 +46,8 @@ public class Starter {
                     while (true) {
                         fileName = ConsoleReader.readString("Введіть ім’я файлу");
                         encodedFile = new File(fileName);
-                        StringBuffer fileInput = new StringBuffer();
-                        String substring;
-                        try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
-                            int i=0;
-                            while (true) {
-                                i++;
-                                System.out.println("reading line" + i);
-                                substring = in.readLine();
-                                System.out.println(substring);
-                                if (substring!=null){
-                                    fileInput.append(substring+"\n");
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-
-                            encodedMessage = fileInput.toString();
-                            System.out.println("Повідомленя прочитане:\n" + encodedMessage);
-                            break;
-                        }
-                        catch (EOFException e){
-                            System.out.println("eof");
-
-                        }
-                        catch (FileNotFoundException e){
-                            System.out.println("Немає такого файлу!");
-                        }
-                        catch (IOException e){
-                            e.printStackTrace();
-                        }
-
+                        encodedMessage = readMessageFromFile(fileName);
+                        break;
                     }
 
                     decodeKey = ConsoleReader.readInt("Введіть ключ шифрування.",1)[0];
@@ -97,4 +61,7 @@ public class Starter {
 
         }
     }
+
+
+
 }
